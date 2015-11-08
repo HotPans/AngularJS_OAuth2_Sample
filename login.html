@@ -1,11 +1,10 @@
 <div align="center">
-<form name="loginForm" ng-controller="OAuth2LoginController">
-<button ng-click="login()">ログイン</button>
-<!-- <button onclick="location.href='#/test'">test</button> -->
-</form>
-</div>
+<form name="loginForm" ng-controller="OAuth2LoginController" ng-model="msg">
+<button ng-click="login()">ログイン</button><br>
 
-<div align="center">
 <a href="#/test01">test01</a>
-<a href="#/test02">test02</a>
+<a href="#/test02">test02</a><br>
+<div><font color="red">{{msg}}</font></div>
+
+</form>
 </div>

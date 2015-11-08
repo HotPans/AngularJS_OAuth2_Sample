@@ -57,7 +57,7 @@ function LoginSuccessController($scope, $rootScope, $location) {
 	  var value  = param[1];
 	  console.log("key: " + key + ", value: " + value);
 	  params[key] = value;
-	  $rootScope.accesstoken=params;
+	  $rootScope.accesstoken = params;
 	}
 
 	window.localStorage.setItem("access_token", params["access_token"]);
@@ -73,14 +73,14 @@ function LoginFailController($scope, $rootScope, $location) {
 }
 
 function Test01Controller($scope, $rootScope, $location) {
-	checkLogin($scope, $location);
+	checkLogin($scope, $location, "test01.html");
 }
 
 function Test02Controller($scope, $rootScope, $location) {
-	checkLogin($scope, $location);
+	checkLogin($scope, $location, "test02.html");
 }
 
-function checkLogin($scope, $location){
+function checkLogin($scope, $location, abc){
 	console.log("$location.path: " + $location.path());
 	console.log("$location.absUrl(): " + $location.absUrl());
 
@@ -91,12 +91,9 @@ function checkLogin($scope, $location){
 			window.localStorage.getItem("access_token") == null ||
 			window.localStorage.getItem("access_token") == undefined ||
 			$scope.$root.accesstokenstr != window.localStorage.getItem("access_token")){
-		if(window.confirm('ログインしてください。')){
-			$location.path("/login");
-		}
-		else{
-			$location.path("/login");
-		}
+
+		$scope.$root.msg = "ログインに失敗しました。";
+		$location.path("/login");
 	}
 }
 
@@ -106,10 +103,12 @@ userServices.controller("OAuth2LoginController", function ($scope, $http, $locat
     $scope.login = function(){
         console.log("★登録ボタン押下");
 
-        var client_id="789086735509-lhn2hfpm3sef9pa7ov3gvemdv13a46r1.apps.googleusercontent.com";
-        var scope="https://www.googleapis.com/auth/plus.me";
-        var redirect_uri="http://localhost:18080/oauth2_hotpans";
-        var response_type="token";
+        var client_id = "789086735509-lhn2hfpm3sef9pa7ov3gvemdv13a46r1.apps.googleusercontent.com";
+        var scope = "https://www.googleapis.com/auth/plus.me";
+        //var redirect_uri = "http://localhost:18080/oauth2";
+        //var redirect_uri = "https://makopi23-oauth2-test01.herokuapp.com";
+        var redirect_uri = "http://localhost:18080/oauth2_hotpans";
+        var response_type = "token";
         var url="https://accounts.google.com/o/oauth2/auth?scope=" + scope
         	+ "&client_id=" + client_id
         	+ "&redirect_uri=" + redirect_uri
